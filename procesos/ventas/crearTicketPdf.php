@@ -18,7 +18,7 @@ function file_get_contents_curl($url) {
     return $data;
 }
 
- $html=file_get_contents("http://localhost/ventasAlmacen/vistas/ventas/ticketVentaPdf.php?idventa=".$id);
+ $html=file_get_contents("http://localhost/vistas/ventas/ticketVentaPdf.php?idventa=".$id);
 
 
  
@@ -27,7 +27,7 @@ $pdf = new DOMPDF();
  
 // Definimos el tamaño y orientación del papel que queremos.
 //$pdf->set_paper("letter", "portrait");
-$pdf->set_paper(array(0,0,104,250));
+$pdf->set_paper(array(0,0,190,350));
  
 // Cargamos el contenido HTML.
 $pdf->load_html($html);
@@ -36,7 +36,7 @@ $pdf->load_html($html);
 $pdf->render();
  
 // Enviamos el fichero PDF al navegador.
-$pdf->stream('reporteVenta.pdf');
+$pdf->stream('ticketVenta.pdf');
 
 
 

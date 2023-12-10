@@ -13,7 +13,7 @@ $conexion=$c->conexion();
 			<label>Seleciona Cliente</label>
 			<select class="form-control input-sm" id="clienteVenta" name="clienteVenta">
 				<option value="A">Selecciona</option>
-				<option value="0">Sin cliente</option>
+				<!--<option value="0">Sin cliente</option>-->
 				<?php
 				$sql="SELECT id_cliente,nombre,apellido 
 				from clientes";
@@ -99,13 +99,13 @@ $conexion=$c->conexion();
 
 		$('#btnVaciarVentas').click(function(){
 
-		$.ajax({
-			url:"../procesos/ventas/vaciarTemp.php",
-			success:function(r){
-				$('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
-			}
+			$.ajax({
+				url:"../procesos/ventas/vaciarTemp.php",
+				success:function(r){
+					$('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
+				}
+			});
 		});
-	});
 
 	});
 </script>
@@ -127,6 +127,7 @@ $conexion=$c->conexion();
 		$.ajax({
 			url:"../procesos/ventas/crearVenta.php",
 			success:function(r){
+				console.log(r)
 				if(r > 0){
 					$('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
 					$('#frmVentasProductos')[0].reset();
@@ -144,6 +145,17 @@ $conexion=$c->conexion();
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#clienteVenta').select2();
+
+
+		$('#clienteVenta').on("change", ()=>{
+			$.ajax({
+				url:"../procesos/ventas/vaciarTemp.php",
+				success:function(r){
+					$('#tablaVentasTempLoad').load("ventas/tablaVentasTemp.php");
+				}
+			});
+		})
+
 		$('#productoVenta').select2();
 
 	});

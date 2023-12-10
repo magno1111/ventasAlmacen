@@ -26,7 +26,9 @@
 					<td>Folio</td>
 					<td>Fecha</td>
 					<td>Cliente</td>
-					<td>Total de compra</td>
+					<td>Sub Total</td>
+					<td>IGV 18%</td>
+					<td>Total</td>
 					<td>Ticket</td>
 					<td>Reporte</td>
 				</tr>
@@ -45,9 +47,19 @@
 					</td>
 					<td>
 						<?php 
-							echo "$".$obj->obtenerTotal($ver[0]);
+							echo "S/".$obj->obtenerTotal($ver[0]);
 						 ?>
 					</td>
+					<td>
+						<?php 
+							echo "S/".$obj->obtenerTotal($ver[0]) * 0.18;
+						 ?>
+					</td>
+					<td>
+						<?php 
+							echo "S/".$obj->obtenerTotal($ver[0]) * 1.18;
+						 ?>
+
 					<td>
 						<a href="../procesos/ventas/crearTicketPdf.php?idventa=<?php echo $ver[0] ?>" class="btn btn-danger btn-sm">
 							Ticket <span class="glyphicon glyphicon-list-alt"></span>

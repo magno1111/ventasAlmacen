@@ -37,7 +37,7 @@ $result=mysqli_query($conexion,$sql);
  	<link rel="stylesheet" type="text/css" href="../../librerias/bootstrap/css/bootstrap.css">
  </head>
  <body>
- 		<img src="../../img/ventas.jpg" width="200" height="200">
+ 		<img src="/ventas.jpg" width="200" height="200">
  		<br>
  		<table class="table">
  			<tr>
@@ -87,9 +87,21 @@ $result=mysqli_query($conexion,$sql);
  				$total=$total + $ver[4];
  			endwhile;
  			 ?>
- 			 <tr>
- 			 	<td>Total=  <?php echo "$".$total; ?></td>
- 			 </tr>
  		</table>
+		<br>
+		
+		<table class="table" border="1" style="border-collapse: collapse;">
+			<tr>
+				<td>Subtotal</td>
+				<td><?php echo $total; ?></td>
+			</tr>
+			<tr>
+				<td>IGV</td>
+				<td><?php echo $total * 0.18; ?></td>
+			</tr>
+			<tr>
+				<td>Total</td>
+				<td><?php echo $total + ($total * 0.18); ?></td>
+			</tr>
  </body>
  </html>

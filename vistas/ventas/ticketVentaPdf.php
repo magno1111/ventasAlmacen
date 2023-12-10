@@ -41,13 +41,13 @@ $result=mysqli_query($conexion,$sql);
             margin-left: 0.6em;
         }
     body{
-    	font-size: xx-small;
+		font-size: 1.2rem
     }
 	</style>
 
  </head>
  <body>
- 		<p>Facultad autodidacta</p>
+ 		<p>TAMBO-PATAS</p>
  		<p>
  			Fecha: <?php echo $fecha; ?>
  		</p>
@@ -58,7 +58,7 @@ $result=mysqli_query($conexion,$sql);
  			cliente: <?php echo $objv->nombreCliente($idcliente); ?>
  		</p>
  		
- 		<table style="border-collapse: collapse;" border="1">
+ 		<table style="border-collapse: collapse; width: 100%" border="1">
  			<tr>
  				<td>Nombre</td>
  				<td>Precio</td>
@@ -87,11 +87,21 @@ $result=mysqli_query($conexion,$sql);
  				$total=$total + $mostrar[4];
  				} 
  			 ?>
- 			 <tr>
- 			 	<td>Total: <?php echo "$".$total ?></td>
- 			 </tr>
  		</table>
 
+		<br>
+		<table style="border-collapse: collapse; width: 100%" border="1">
+			<tr>
+				<td>Subtotal</td>
+				<td>IGV 18%</td>
+				<td>Total</td>
+			</tr>
+			<tr>
+				<td><?php echo "$".$total ?></td>
+				<td><?php echo "$".($total * 0.18) ?></td>
+				<td><?php echo "$".($total + ($total * 0.18)) ?></td>
+			</tr>
+		</table>
  		
  </body>
  </html>
