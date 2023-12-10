@@ -18,7 +18,7 @@ function file_get_contents_curl($url) {
     return $data;
 }
 
- $html=file_get_contents("http://localhost/vistas/ventas/reporteVentaPdf.php?idventa=".$id);
+ $html=file_get_contents("http://localhost/proyecto/vistas/ventas/reporteVentaPdf.php?idventa=".$id);
 
 
  
