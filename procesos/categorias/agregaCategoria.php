@@ -1,20 +1,22 @@
-<?php 
-	session_start();
-	require_once "../../clases/Conexion.php";
-	require_once "../../clases/Categorias.php";
-	$fecha=date("Y-m-d");
-	$idusuario=$_SESSION['iduser'];
-	$categoria=$_POST['categoria'];
+<?php
+session_start();
+require_once "../../clases/Conexion.php";
+require_once "../../clases/Categorias.php";
+$fecha = date("Y-m-d");
+$idusuario = $_SESSION['iduser'];
+$categoria = $_POST['categoria'];
 
-	$datos=array(
-		$idusuario,
-		$categoria,
-		$fecha
-				);
+$datos = array(
+	$idusuario,
+	$categoria,
+	$fecha
+);
 
-	$obj= new categorias();
+$obj = new categorias();
 
+//si ya existe el nombre de la categoria agregar no se puede
+if ($obj->validarRepeticion($categoria) > 0) {
+	echo 2;
+} else {
 	echo $obj->agregaCategoria($datos);
-
-
- ?>
+}

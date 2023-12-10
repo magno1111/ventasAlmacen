@@ -1,16 +1,18 @@
-<?php 
+<?php
 session_start();
-if(isset($_SESSION['usuario'])){
+if (isset($_SESSION['usuario'])) {
 
-	?>
+?>
 
 
 	<!DOCTYPE html>
 	<html>
+
 	<head>
 		<title>categorias</title>
 		<?php require_once "menu.php"; ?>
 	</head>
+
 	<body>
 
 		<div class="container">
@@ -58,56 +60,61 @@ if(isset($_SESSION['usuario'])){
 		</div>
 
 	</body>
+
 	</html>
 	<script type="text/javascript">
-		$(document).ready(function(){
+		$(document).ready(function() {
 
 			$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
 
-			$('#btnAgregaCategoria').click(function(){
+			$('#btnAgregaCategoria').click(function() {
 
-				vacios=validarFormVacio('frmCategorias');
+				vacios = validarFormVacio('frmCategorias');
 
-				if(vacios > 0){
+				if (vacios > 0) {
 					alertify.alert("Debes llenar todos los campos!!");
 					return false;
 				}
 
-				datos=$('#frmCategorias').serialize();
+				datos = $('#frmCategorias').serialize();
 				$.ajax({
-					type:"POST",
-					data:datos,
-					url:"../procesos/categorias/agregaCategoria.php",
-					success:function(r){
-						if(r==1){
-					//esta linea nos permite limpiar el formulario al insetar un registro
-					$('#frmCategorias')[0].reset();
+					type: "POST",
+					data: datos,
+					url: "../procesos/categorias/agregaCategoria.php",
+					success: function(r) {
+						if (r == 1) {
+							//esta linea nos permite limpiar el formulario al insetar un registro
+							$('#frmCategorias')[0].reset();
 
-					$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
-					alertify.success("Categoria agregada con exito :D");
-				}else{
-					alertify.error("No se pudo agregar categoria");
-				}
-			}
-		});
+							$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
+							alertify.success("Categoria agregada con exito :D");
+						} 
+						else if(r >= 2){
+							alertify.error("La categoria ya existe :(");
+						}
+						else {
+							alertify.error("No se pudo agregar categoria");
+						}
+					}
+				});
 			});
 		});
 	</script>
 
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#btnActualizaCategoria').click(function(){
+		$(document).ready(function() {
+			$('#btnActualizaCategoria').click(function() {
 
-				datos=$('#frmCategoriaU').serialize();
+				datos = $('#frmCategoriaU').serialize();
 				$.ajax({
-					type:"POST",
-					data:datos,
-					url:"../procesos/categorias/actualizaCategoria.php",
-					success:function(r){
-						if(r==1){
+					type: "POST",
+					data: datos,
+					url: "../procesos/categorias/actualizaCategoria.php",
+					success: function(r) {
+						if (r == 1) {
 							$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
 							alertify.success("Actualizado con exito :)");
-						}else{
+						} else {
 							alertify.error("no se pudo actaulizar :(");
 						}
 					}
@@ -117,33 +124,33 @@ if(isset($_SESSION['usuario'])){
 	</script>
 
 	<script type="text/javascript">
-		function agregaDato(idCategoria,categoria){
+		function agregaDato(idCategoria, categoria) {
 			$('#idcategoria').val(idCategoria);
 			$('#categoriaU').val(categoria);
 		}
 
-		function eliminaCategoria(idcategoria){
-			alertify.confirm('¿Desea eliminar esta categoria?', function(){ 
+		function eliminaCategoria(idcategoria) {
+			alertify.confirm('¿Desea eliminar esta categoria?', function() {
 				$.ajax({
-					type:"POST",
-					data:"idcategoria=" + idcategoria,
-					url:"../procesos/categorias/eliminarCategoria.php",
-					success:function(r){
-						if(r==1){
+					type: "POST",
+					data: "idcategoria=" + idcategoria,
+					url: "../procesos/categorias/eliminarCategoria.php",
+					success: function(r) {
+						if (r == 1) {
 							$('#tablaCategoriaLoad').load("categorias/tablaCategorias.php");
 							alertify.success("Eliminado con exito!!");
-						}else{
+						} else {
 							alertify.error("No se pudo eliminar :(");
 						}
 					}
 				});
-			}, function(){ 
+			}, function() {
 				alertify.error('Cancelo !')
 			});
 		}
 	</script>
-	<?php 
-}else{
+<?php
+} else {
 	header("location:../index.php");
 }
 ?>
